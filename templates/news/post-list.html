@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load  category_tag %}
+{% block content %}
+    {% for post in posts %}
+        <h1><a href="{% url 'post_detail' slug=post.slug  %}">{{ post.title }}</a></h1>
+        <p>{{ post.text }}</p>
+    {% endfor %}
+    <hr>
+    {% category_list %}
+{% endblock content %}

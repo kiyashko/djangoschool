@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load  category_tag %}
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.text }}</p>
+    <hr>
+    <h3>Коментарии</h3>
+    {% for comment in post.get_comments %}
+        {{ comment.text }}
+    {% endfor %}
+    <hr>
+        {% category_list %}
+  
+{% endblock content %}

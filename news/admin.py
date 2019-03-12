@@ -22,13 +22,13 @@ class PostAdmin(admin.ModelAdmin):
     filter_vertical = ("tags",)
     show_full_result_count = False
     inlines = [CommentAdmin]
+    prepopulated_fields = {"slug": ("title",)}
 
 class CommentsAdmin(admin.ModelAdmin):
     """Комментарии в админке"""
     list_display = ("id", "post", "created")
     list_display_links = ("id", "post")
     list_filter = ("created",)
-
 
 admin.site.register(Category)
 admin.site.register(Tag)

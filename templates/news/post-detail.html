@@ -2,6 +2,8 @@
 {% load  category_tag %}
 {% block content %}
     <h1>{{ post.title }}</h1>
+    <h2>{{ post.headline }}</h2>
+    <p>Дата публикации: {{ post.publicated }}</p>
     <p>{{ post.text }}</p>
     <hr>
     <h3>Коментарии</h3>

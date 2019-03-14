@@ -3,7 +3,12 @@
 {% block content %}
     <h1>{{ post.title }}</h1>
     <h2>{{ post.headline }}</h2>
-    <p>Дата публикации: {{ post.publicated }}</p>
+    <h5>{{ post.subtitle }}</h5>
+    {% if post.image %}
+        <img src="{{ post.image.url }}" style="width: 400px; height: 300px;">
+    {% endif %}
+    <p>{{ post.mini_text }}</p>
+    <small>{{ post.published_date }}</small>
     <p>{{ post.text }}</p>
     <hr>
     <h3>Коментарии</h3>
@@ -12,7 +17,6 @@
     {% endfor %}
     <form action="{% url 'add_comment' slug=post.slug %}" method="post">
         {% csrf_token %}
-{#        {{ form }}#}
         <input name="text" value="" style="border: 1px solid #000; padding: 15px">
         <button type="submit">Отправить</button>
     </form>

@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
@@ -54,3 +55,26 @@ class PostDetail(DetailView):
             return redirect("news")
         else:
             return HttpResponse(status=400)
+
+class Search(View):
+    """Поиск по статьям и категориям"""
+    def get(self, request):
+        search = request.GET.get("search", None)
+        context = Post.objects.filter(title__icontains=search)
+        if not context.exists():
+            context = Post.objects.filter(category__name__icontains=search)
+        return render(request, 'news/post-list.html', {"posts": context})
+
+class DateFilter(View):
+    """ Фильтр статей по дате"""
+    def get(self, request, pk):
+        if pk == 1:
+            now = timezone.now() - timedelta(minutes=60*24)
+            context = Post.objects.filter(created__gte=now)
+        elif pk == 2:
+            now = timezone.now() - timedelta(minutes=60*24*7)
+            context = Post.objects.filter(created__gte=now)
+        elif pk == 3:
+            now = timezone.now() - timedelta(minutes=60*24*30)
+            context = Post.objects.filter(created__gte=now)
+        return render(request, 'news/post-list.html', {"posts": context})

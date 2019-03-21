@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% load  category_tag %}
 {% block content %}
+<form action="{% url 'search_form'  %}" method="get">
+   <input type="text" name="search">
+   <button type="submit">Искать</button>
+</form>
+<p><a href="{% url 'date_filter' pk=1 %}">Сегодня</a></p>
+<p><a href="{% url 'date_filter' pk=2 %}">Неделя</a></p>
+<p><a href="{% url 'date_filter' pk=3 %}">Месяц</a></p>
     {% for post in posts %}
         <h1><a href="{% url 'post_detail' slug=post.slug  %}">{{ post.title }}</a></h1>
         <h5>{{ post.subtitle }}</h5>

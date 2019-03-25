@@ -1,5 +1,5 @@
 {% for category in list_category %}
-    <ul>
+    <ul class="list-unstyled mb-0">
         <li><a href="{% url 'category_post' slug=category.slug %}">{{ category.name }}</a></li>
     </ul>
 {% endfor %}

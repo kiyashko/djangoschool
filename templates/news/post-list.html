@@ -1,23 +1,31 @@
-{% extends 'base.html' %}
-{% load  category_tag %}
-{% block content %}
-<form action="{% url 'search_form'  %}" method="get">
-   <input type="text" name="search">
-   <button type="submit">Искать</button>
-</form>
-<p><a href="{% url 'date_filter' pk=1 %}">Сегодня</a></p>
-<p><a href="{% url 'date_filter' pk=2 %}">Неделя</a></p>
-<p><a href="{% url 'date_filter' pk=3 %}">Месяц</a></p>
-    {% for post in posts %}
-        <h1><a href="{% url 'post_detail' slug=post.slug  %}">{{ post.title }}</a></h1>
-        <h5>{{ post.subtitle }}</h5>
-        {% if post.image %}
-            <img src="{{ post.image.url }}" style="width: 400px; height: 300px;">
-        {% endif %}
-        <p>{{ post.mini_text }}</p>
-        <small>{{ post.published_date }}</small>
-        <p>{{ post.text }}</p>
-    {% endfor %}
-    <hr>
-    {% category_list %}
-{% endblock content %}
+{% extends 'news/base.html' %}
+{% block post %}
+<h1 class="my-4">Solar Panels
+  <small>Solar Secondary Text</small>
+</h1>
+{% for post in posts %}
+<div class="card mb-4">
+  {% if post.image %}
+    <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+  {% endif %}
+  <div class="card-body">
+    <h2 class="card-title">{{ post.title }}</h2>
+    <small class="card-title">{{ post.subtitle }}</small>
+    <p class="card-text">{{ post.mini_text }}</p>
+    <a href="{% url 'post_detail' slug=post.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+  </div>
+  <div class="card-footer text-muted">
+    <small>{{ post.published_date }}</small>
+    <a href="#">Start Bootstrap</a>
+  </div>
+</div>
+{% endfor %}
+<ul class="pagination justify-content-center mb-4">
+  <li class="page-item">
+    <a class="page-link" href="#">&larr; Older</a>
+  </li>
+  <li class="page-item disabled">
+    <a class="page-link" href="#">Newer &rarr;</a>
+  </li>
+</ul>
+{% endblock post %}

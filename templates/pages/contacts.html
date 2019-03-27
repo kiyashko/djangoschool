@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="col-md-8">
+    <h1 class="my-4">Контакты
+    </h1>
+    <p>{{ acceptmessage }}</p>
+    <p>Напишите сообщение:</p>
+    <form action="/contacts/" method="post">
+        {% csrf_token %}
+        <input type="text" name="first_name" placeholder="Имя">
+        <input type="text" name="last_name" placeholder="Фамилия">
+        <input type="email" name="email" placeholder="E-Mail" value="email@email.com">
+        <textarea rows="10" cols="45" name="text" placeholder="Сообщение"></textarea>
+        <button type="submit">Отправить</button>
+    </form>
+  </div>
+  {% include 'include/sidebar.html' %}
+{% endblock content %}

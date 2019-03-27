@@ -42,7 +42,10 @@ INSTALLED_APPS = [
 
     'mptt',
 
+    'bootstrap4',
+
     'news',
+    'pages',
 ]
 
 SITE_ID = 1

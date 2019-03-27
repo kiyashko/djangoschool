@@ -1,4 +1,5 @@
 {% extends 'news/base.html' %}
+{% load mptt_tags bootstrap4 %}
 {% block post %}
 <h1 class="my-4">Solar Panels
   <small>Solar Secondary Text</small>
@@ -16,16 +17,19 @@
   </div>
   <div class="card-footer text-muted">
     <small>{{ post.published_date }}</small>
-    <a href="#">Start Bootstrap</a>
+    {% for tag in post.tags.all %}
+          <a href="#">{{ tag.name }}</a>{% if not forloop.last %},{% endif %}
+    {% endfor %}
   </div>
 </div>
 {% endfor %}
-<ul class="pagination justify-content-center mb-4">
+{% bootstrap_pagination page_obj pages_to_show=5 %}
+<!-- <ul class="pagination justify-content-center mb-4">
   <li class="page-item">
     <a class="page-link" href="#">&larr; Older</a>
   </li>
   <li class="page-item disabled">
     <a class="page-link" href="#">Newer &rarr;</a>
   </li>
-</ul>
+</ul> -->
 {% endblock post %}

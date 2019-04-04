@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     'news',
     'pages',
+    'menu',
 ]
 
 SITE_ID = 1

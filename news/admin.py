@@ -10,6 +10,7 @@ admin.site.site_header = "Django Course"
 @admin.register(Category)
 class CategoryAdmin(MPTTModelAdmin):
     """Категории"""
+    list_display = ("name", "id")
     prepopulated_fields = {'slug': ('name',)}
     mptt_level_indent = 20
 

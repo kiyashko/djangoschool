@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Page(models.Model):
     """Модель страниц"""
@@ -21,6 +22,12 @@ class Page(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        if self.slug:
+            return reverse('page', kwargs={"page": self.slug})
+        else:
+            return reverse('page')
 
 class ContactForm(models.Model):
     """Модель формы обратной связи"""

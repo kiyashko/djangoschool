@@ -31,6 +31,8 @@ class Category(MPTTModel):
         verbose_name = "Категория статей"
         verbose_name_plural = "Категории статей"
 
+    def get_absolute_url(self):
+        return reverse('category_post', kwargs={"category": self.slug})
 
 class Tag(models.Model):
     """Модель тегов"""
@@ -96,7 +98,7 @@ class Post(models.Model):
         return Comment.objects.filter(post_id=self.id)
 
     def get_absolute_url(self):
-        return reverse('post_detail', kwargs={"category": self.category.slug, "slug": self.slug})
+        return reverse('post_detail', kwargs={"slug": self.slug})
 
     class Meta:
         verbose_name = "Статья"

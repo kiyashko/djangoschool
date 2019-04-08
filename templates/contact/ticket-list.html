@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="col-12"><p><a class="btn btn-info" href="{% url 'ticket-create' %}">Создать</a></p>
+    </div>
+    <div class="col-12">
+        {% for ticket in object_list %}
+            <p>{{ ticket.user }} - {{ ticket.created }}<br>
+                <a class="btn btn-info" href="{% url 'ticket-update' pk=ticket.id %}">Редактировать</a>
+                <a class="btn btn-info" href="{% url 'ticket-delete' pk=ticket.id %}">Удалить</a>
+            </p>
+        {% endfor %}
+    </div>
+{% endblock content %}

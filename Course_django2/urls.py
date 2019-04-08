@@ -19,8 +19,9 @@ from django.urls import path, include
 from Course_django2 import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
+    path("admin/", admin.site.urls),
+    path("ticket/", include("contact.urls")),
+    path("accounts/", include('allauth.urls')),
     path("news/", include("news.urls")),
     path("", include("pages.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
